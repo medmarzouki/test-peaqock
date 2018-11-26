@@ -1,0 +1,49 @@
+
+<div class="container">
+  <h1 style="text-align: center">Article</h1>
+  <hr>
+  <div class="row">
+    <div class="col-sm">
+      <form [formGroup]="articleForm">
+        <div class="form-group">
+          <label for="titre">Titre</label>
+          <input type="email" class="form-control" id="titre" name="titre"  >
+          <div class="alert alert-danger" role="alert"
+               *ngIf="articleForm.controls['titre'].invalid && (articleForm.controls['titre'].touched || articleForm.controls['titre'].dirty)">
+            Merci de saisir le titre d'article!
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="auteur">Auteur</label>
+          <input type="email" class="form-control" id="auteur" name="auteur"  placeholder="Auteur">
+          <div class="alert alert-danger" role="alert"
+               *ngIf="articleForm.controls['auteur'].invalid && (articleForm.controls['auteur'].touched || articleForm.controls['auteur'].dirty)">
+            Merci de donner un nom d'auteur d'article!
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="urlImage">URL d'Image</label>
+          <input type="email" class="form-control" id="urlImage" name="urlImage"  placeholder="URL d'Image">
+          <div class="alert alert-danger" role="alert"
+               *ngIf="articleForm.controls['urlImage'].invalid && (articleForm.controls['urlImage'].touched || articleForm.controls['urlImage'].dirty)">
+            Merci d'ajouter un url pour l'image d'article!
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contenu">Contenu</label>
+          <textarea class="form-control" id="contenu" name="contenu" rows="3"></textarea>
+          <div class="alert alert-danger" role="alert"
+               *ngIf="articleForm.controls['contenu'].invalid && (articleForm.controls['contenu'].touched || articleForm.controls['contenu'].dirty)">
+            Merci de saisir le contenu d'article!
+          </div>
+        </div>
+        <div style="text-align: center;">
+          <button class="btn btn-success"  >Ajouter</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Titre</th>
+          <th scope="col">Extrait</th>
+          <th scope="col">Date Creation</th>
+          <th scope="col">
+            <button class="btn btn-success"
+                    (click)="operation = 'add'; initArticle(); ">
+              Ajouter
+            </button>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let article of articles">
+          <th scope="row">{{ article.id}}</th>
+          <td>{{ article.titre}}</td>
+          <td>{{ (article.contenu).substr(0, 30)}}...</td>
+          <td>{{ article.dateCreation}}</td>
+          <td>
+            <button class="btn btn-warning"
+                    (click)="operation = 'edit'; selectedArticle = article; oldArticle = article;">
+              Modifier
+            </button>
+            <button class="btn btn-danger"
+                    (click)="operation = 'delete'; selectedArticle = article; deleteArticle(); ">
+              Supprimer
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-4 crud-article" *ngIf="operation == 'add' || operation == 'edit'">
+      <h1 style="text-align: center">
+        {{  operation == 'add' ? 'Ajouter Article' :
+            operation == 'edit' ? 'Modifier Article' :
+            operation == 'delete' ? 'Supprimer Article' : ''
+        }}
+      </h1>
+      <hr>
+
+          <form [formGroup]="articleForm">
+            <div class="form-group">
+              <label for="titre">Titre</label>
+              <input type="email" class="form-control" id="titre"
+                     name="titre"
+                     placeholder="Titre"
+                     formControlName="titre"
+                     [(ngModel)]="selectedArticle.titre">
+              <div class="alert alert-danger" role="alert"
+                   *ngIf="articleForm.controls['titre'].invalid && (articleForm.controls['titre'].touched || articleForm.controls['titre'].dirty)">
+                Merci de saisir le titre d'article!
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="auteur">Auteur</label>
+              <input type="email" class="form-control" id="auteur" name="auteur"
+                     placeholder="Auteur"
+                     formControlName="auteur"
+                     [(ngModel)]="selectedArticle.auteur">
+              <div class="alert alert-danger" role="alert"
+                   *ngIf="articleForm.controls['auteur'].invalid && (articleForm.controls['auteur'].touched || articleForm.controls['auteur'].dirty)">
+                Merci de donner un nom d'auteur d'article!
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="urlImage">URL d'Image</label>
+              <input type="email" class="form-control" id="urlImage" name="urlImage"
+                     placeholder="URL d'Image"
+                     formControlName="urlImage"
+                     [(ngModel)]="selectedArticle.urlImage">
+              <div class="alert alert-danger" role="alert"
+                   *ngIf="articleForm.controls['urlImage'].invalid && (articleForm.controls['urlImage'].touched || articleForm.controls['urlImage'].dirty)">
+                Merci d'ajouter un url pour l'image d'article!
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contenu">Contenu</label>
+              <textarea class="form-control" id="contenu" name="contenu"
+                        rows="3"
+                        formControlName="contenu"
+                        [(ngModel)]="selectedArticle.contenu">
+
+              </textarea>
+              <div class="alert alert-danger" role="alert"
+                   *ngIf="articleForm.controls['contenu'].invalid && (articleForm.controls['contenu'].touched || articleForm.controls['contenu'].dirty)">
+                Merci de saisir le contenu d'article!
+              </div>
+            </div>
+            <div style="text-align: center;">
+              <button [class]="operation == 'add' ? 'btn btn-success' : 'btn btn-warning'"
+                      (click)=" operation == 'add' ? addArticle() : updateArticle() ">
+                {{ operation == 'add' ? "Ajouter" : operation == 'edit' ? ' Modifier' : ''}}
+              </button>
+            </div>
+
+          </form>
+    </div>
+  </div>
+</div>
+
